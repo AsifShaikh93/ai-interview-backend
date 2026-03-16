@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: asif1993/ai-interview-backend:v1
+          image: asif1993/ai-interview-backend:v2
           ports:
             - containerPort: 8000
           env:
