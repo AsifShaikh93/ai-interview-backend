@@ -11,7 +11,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["https://ai-interview-agent.c-321a6c0.stage.kyma.ondemand.com"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
