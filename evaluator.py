@@ -1,32 +1,24 @@
 from llm import llm
 import json
 
-
 def evaluate_answer(question, answer):
-
     prompt = f"""
-You are an interview evaluator.
+    You are a strict technical interview evaluator.
+    Analyze the candidate's answer based on the question.
+    
+    Question: {question}
+    Answer: {answer}
 
-Question:
-{question}
-
-Candidate Answer:
-{answer}
-
-Return JSON:
-
-{{
- "score": number,
- "feedback": "short explanation"
-}}
-"""
-
+    Return ONLY a valid JSON object with this structure:
+    {{
+     "score": <number 0-10>,
+     "feedback": "<concise feedback>"
+    }}
+    """
     response = llm.invoke(prompt)
-
+    content = response.content.replace("```json", "").replace("```", "").strip()
+    
     try:
-        return json.loads(response.content)
+        return json.loads(content)
     except:
-        return {
-            "score": 0,
-            "feedback": response.content
-        }
+        return {"score": 0, "feedback": "Failed to parse evaluation."}
